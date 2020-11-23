@@ -1,1 +1,46 @@
-<div>i am in games!</div>
+<html>
+<table>
+    <thead>
+        <th>Game Id</th>
+        <th>Name</th>
+        <th>Genre Id</th>
+        <th>Platform Id</th>
+    </thead>
+    <tbody>
+        {{#each Games}}
+        <tr>
+            <td>{{gameId}}</td>
+            <td>{{gameName}}</td>
+            <td>{{genreId}}</td>
+            <td>{{platformId}}</td>
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<h1>Insert Game</h1>
+<form id='addGame' action='/games' method='post'>
+    Game: <input type='text' name='gameName'>
+    Genre: <input type='text' name='genreId'>
+    Platform: <input type='text' name='platformId'>
+    <input type='submit' value='Submit'>
+</form>
+
+<h1>Filter Game</h1>
+<form id='filterGame' action='' method=''>
+    <label>name:
+        <input type='text' name='gameName' id = 'gameName'>
+    </label>
+    <label>genre:
+        <input type='text' name='genreName' id = 'genreName'>      
+    </label>
+    <label>platform:
+        <input type='text' name='platformName'>
+    </label>
+    <input type='button' value='Filter' onclick='searchGameByName()'>
+</form>
+
+<h1>Update Game</h1>
+</html>
