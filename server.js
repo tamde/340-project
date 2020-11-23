@@ -1,4 +1,5 @@
 var express = require('express');
+var mysql = require('./dbcon.js');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
@@ -9,12 +10,21 @@ app.use(bodyParser.json())
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+app.set('mysql', mysql);
 app.set('port', 3000);
 
 
 app.use('/static', express.static('public'));
 app.use('/', require('./home.js'));
 app.use('/games', require('./games.js'));
+app.use('/genres', require('./genres.js'));
+app.use('/platforms', require('./platforms.js'));
+app.use('/orders', require('./orders.js'));
+app.use('/customers', require('./customers.js'));
+app.use('/library', require('./library.js'));
+
+
+app.use('/', express.static('public'));
 
 // app.get("/", function(req, res, next){
 //   res.render("home");
