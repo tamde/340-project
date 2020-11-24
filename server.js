@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('mysql', mysql);
-app.set('port', 3000);
+app.set('port', process.argv[2]);
 
 
 app.use('/static', express.static('public'));

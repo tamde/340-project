@@ -1,0 +1,120 @@
+body {
+	background-color: white;
+	margin: 20px;
+	padding: 0;
+}
+
+h1 {
+	font-family: 'Playfair Display';
+	font-weight: lighter;
+	font-size: 70px;
+	text-align: center;
+
+}
+
+h2 {
+	font-size: 50px;
+	font-family: "Playfair Display", serif;
+	font-style: italic;
+	text-align: center;
+}
+
+
+
+h3 {
+	font-family: 'Montserrat';
+	font-style: italic;
+	font-weight: bold;
+}
+
+ul.navBar {
+	background-color: black;
+	list-style-type: none;
+	margin: 0;
+	overflow: hidden;
+	padding-left: 30px;
+	padding-right: 30px;
+	height: 60px;
+}
+
+
+li a {
+	float: left;
+	display: inline;
+	font-family: 'Playfair Display';
+	background-color: black;
+	display: block;
+	padding: 0px 15px;
+	color: white;
+	text-decoration: none;
+	position: relative;
+	top: 18px;
+
+}
+
+
+li a:visited {
+	color: white;
+}
+
+li a.port:hover {
+	color: black;
+}
+
+li a:hover {
+	color: lightgrey;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+}
+
+.menu {
+	font-size: 18px;
+}
+
+
+
+table {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Montserrat';
+	text-align: center;
+	border-collapse: collapse;
+
+}
+
+
+thead {
+	background-color: lightgray;
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+}
+
+table tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+td {
+	border-bottom: 1px solid gray;
+	border-right: 1px solid gray;
+}
+
+th {
+	border-bottom: 1px solid black;
+	border-right: 1px solid black;
+}
+
+form {
+	font-family: 'Montserrat';
+}
+
+input {
+	font-family: 'Montserrat';
+	display: block;
+}

@@ -1,1 +1,66 @@
-<h1>in customers</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Customers</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:ital,wght@0,400;1,800&display=swap"
+    rel="stylesheet">
+  <style>
+  </style>
+</head>
+</div>
+    <br>
+    <br>
+    <h2>
+      Customers Table
+    </h2>
+    <div>
+<table>
+    <thead>
+    <th>custID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>street</th>
+    <th>city</th>
+    <th>state</th>
+  </thead>
+    <tbody>
+        {{#each Customers}}
+        <tr>
+            <td>{{custId}}</td>
+            <td>{{firstName}}</td>
+            <td>{{lastName}}</td>
+            <td>{{street}}</td>
+            <td>{{city}}</td>
+            <td>{{state}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+  <h3>Insert Customer</h3>
+  <form id='addCustomer' action='/customers' method='post'>
+      First Name: <input type='text' name='fName'>
+      Last Name: <input type='text' name='lName'>
+      Street: <input type='text' name='street'>
+      City: <input type='text' name='city'>
+      State: <input type='text' name='state'>
+      <input type='submit' value='Insert New Customer'>
+  </form>
+
+  <h3>Filter Customers</h3>
+  <form id='filterCustomers' action='' method=''>
+      <label>Firstname:
+          <input type='text' name='name'>
+      </label>
+      <label>genre:
+          <input type='text' name='genreName'>      
+      </label>
+      <label>platform:
+          <input type='text' name='platformName'>
+      </label>
+      <input type='button' value='Filter' onclick='filter()'>
+  </form>
+
+</html>
