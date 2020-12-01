@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <th>Genre Id</th>
+        <th>Genre Name</th>
+    </thead>
+    <tbody>
+        {{#each Genres}}
+        <tr>
+            <td>{{genreId}}</td>
+            <td>{{genreName}}</td>            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<h1>Insert genre</h1>
+<form id='addGenre' action='/genres' method='post'>
+    Genre Name: <input type='text' name='genreName'>
+    <input type='submit' value='Submit'>
+</form>
