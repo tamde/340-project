@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Online Game Store</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   </head>
 <body>
   <h1><a href="/">Online Game Store Management System</a>    
@@ -21,7 +20,8 @@
       </ul>
     </div>
     {{{body}}}
-    <script src="/searchGame.js"></script>
-
+    {{#each jsscripts}}
+    <script src="/static/{{this}}"></script>
+    {{/each}}
 </body>
 </html>
