@@ -13,6 +13,8 @@
             <td>{{gameName}}</td>
             <td>{{genreId}}</td>
             <td>{{platformId}}</td>
+            <td><button onclick="deleteGame({{gameId}})">Delete</button></td>
+            <td><a href="/games/{{gameId}}">Update</a></td>
             
         </tr>
         {{/each}}
@@ -20,27 +22,36 @@
 </table>
 
 
-<h1>Insert Game</h1>
+<h3>Insert Game</h3>
 <form id='addGame' action='/games' method='post'>
     Game: <input type='text' name='gameName'>
-    Genre: <input type='text' name='genreId'>
-    Platform: <input type='text' name='platformId'>
+    Genre: <select id='genre' name="genreId"> 
+                {{#each Genres}}
+                <option value="{{id}}">{{genreName}}</option>
+                {{/each}}
+                </select>
+    {{!-- <input type='text' name='genreId'> --}}
+    Platform: <select id='platform' name="platformId"> 
+                {{#each Platforms}}
+                <option value="{{id}}">{{platformName}}</option>
+                {{/each}}
+                </select>
+    {{!-- <input type='text' name='platformId'> --}}
     <input type='submit' value='Submit'>
 </form>
 
 <h1>Filter Game</h1>
 <form id='filterGame' action='' method=''>
-    <label>name:
-        <input type='text' name='gameName' id = 'gameName'>
-    </label>
-    <label>genre:
-        <input type='text' name='genreName' id = 'genreName'>      
-    </label>
-    <label>platform:
+    <label>name:</label>
+        <input type='text' name='gameNameString' id = 'gameNameSearch' value = ''>
+    
+    <label>genre:</label>
+        <input type='text' name='genreName' id = 'genreNameSearch' value = ''>      
+    
+    <label>platform:</label>
         <input type='text' name='platformName'>
-    </label>
-    <input type='button' value='Filter' onclick='searchGameByName()'>
+    
+    <input type="button" value="Filter" onclick="searchGameByName()">
 </form>
 
-<h1>Update Game</h1>
 </html>

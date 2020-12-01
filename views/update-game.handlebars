@@ -1,0 +1,10 @@
+<html>
+<h1>Update {{Games.gameName}}:</h1>
+<form id="update-game" action="/games" method="post">
+    Name: <input type="text" name="gameName" value="{{Games.gameName}}"><br>
+    Genre Id: <input type="text" name="genreId" value="{{Games.genreId}}"><br>
+    Platform Id: <input type="text" name="platformId" value="{{Games.platformId}}"><br>
+</form>
+<button onclick="updateGame({{Games.gameId}})">Update</button>
+{{!-- <script defer>selectPlanet({{person.homeworld}});</script> --}}
+</html>
