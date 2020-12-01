@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Orders</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:ital,wght@0,400;1,800&display=swap"
     rel="stylesheet">
@@ -35,8 +34,18 @@
 </table>
   <h3>Insert New Order:</h3>
   <form id='addOrder' action='/orders' method='post'>
-      custId: <input type='number' name='custId'>
-      gameId: <input type='number' name='gameId'>
+      Customer: <br><select name="customer" id="customer-selector"> 
+        {{#each Customers}}
+        <option value="{{id}}">{{id}} {{firstName}} {{lastName}}</option>
+        {{/each}}
+        </select><br>
+      Game: <br><select name="game" id="game-selector"> 
+        {{#each Games}}
+        <option value="{{id}}">{{id}} {{gameName}}</option>
+        {{/each}}
+        </select><br>
       <input type='submit' value="Insert New Order">
   </form>
+  <script defer>selectCustomer({{Customers.custId}});</script>
+  <script defer>selectGame({{Game.gameId}});</script>
 </html>

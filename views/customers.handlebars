@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Customers</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:ital,wght@0,400;1,800&display=swap"
     rel="stylesheet">
@@ -35,6 +34,8 @@
             <td>{{street}}</td>
             <td>{{city}}</td>
             <td>{{state}}</td>
+            <td><button onclick="deletePerson({{custId}})">Delete</button></td>
+            <td><a href="/customers/{{custId}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>
