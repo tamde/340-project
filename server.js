@@ -5,8 +5,7 @@ var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -22,18 +21,7 @@ app.use('/platforms', require('./platforms.js'));
 app.use('/orders', require('./orders.js'));
 app.use('/customers', require('./customers.js'));
 app.use('/library', require('./library.js'));
-
-
 app.use('/', express.static('public'));
-
-// app.get("/", function(req, res, next){
-//   res.render("home");
-// });
-
-// app.get("/games", function(req,res,next){
-// 	res.render("games");
-// });
-
 
 
 
@@ -49,5 +37,5 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-    console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+    console.log('Express started on http://flip1.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
   });
