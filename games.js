@@ -3,12 +3,13 @@ module.exports = function(){
 
 
 var express = require('express');
+// var app = express();
 var router = express.Router();
 var mysql = require('./dbcon.js');
 
 // displaying all games
 function getGames(res, mysql, context, complete){
-  mysql.pool.query("SELECT * FROM Games", function(error, results, fields){
+  mysql.pool.query("SELECT gameId, gameName, genreName, platformName FROM ((Games INNER JOIN Genres ON Games.genreId = Genres.genreId)INNER JOIN Platforms ON Games.platformId = Platforms.platformId);", function(error, results, fields){
     if(error){
       res.write(JSON.stringify(error));
       res.end();
@@ -60,7 +61,7 @@ function getSingleGame(res, mysql, context, id, complete){
 // filtering
 function getGamesByName(req, res, mysql, context, complete){
   // let gameName = document.getElementById(gameName).value;
-  var query = "SELECT gameId, gameName, genreId, platformId FROM Games WHERE Games.genreName LIKE " + mysql.pool.escape(req.params.s + '%');
+  var query = 'SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameId = ?';
   console.log(query);
   mysql.pool.query(query, function(error, results, fields){
     if(error){
@@ -113,9 +114,11 @@ router.get("/search/:s", function(req, res){
     context.jsscripts = ["updateGame.js"];
     var mysql = req.app.get('mysql');
     getSingleGame(res, mysql, context, req.params.id, complete);
+    getGenres(res, mysql, context, complete);
+    getPlatforms(res, mysql, context, complete);
     function complete(){
         callbackCount++;
-        if(callbackCount >= 1){
+        if(callbackCount >= 3){
             res.render('update-game', context);
         }
 
