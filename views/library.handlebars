@@ -1,1 +1,50 @@
-<h1>in library</h1>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Library</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat&family=Playfair+Display:ital,wght@0,400;1,800&display=swap"
+    rel="stylesheet">
+  <style>
+  </style>
+</head>
+</div>
+    <br>
+    <br>
+    <h2>
+      Library Table
+    </h2>
+    <div>
+<table>
+    <thead>
+    <th>custId</th>
+    <th>gameId</th>
+  </thead>
+    <tbody>
+        {{#each Library}}
+        <tr>
+            <td>{{fullname}}</td>
+            <td>{{gameName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+  <h3>Add Game to Customer's Library:</h3>
+  <form id='addLibrary' action='/library' method='post'>
+      Customer: <br><select name="customer" id="customer-selector"> 
+        {{#each Customers}}
+        <option value="{{id}}">{{id}} {{firstName}} {{lastName}}</option>
+        {{/each}}
+        </select><br>
+      Game: <br><select name="game" id="game-selector"> 
+        {{#each Games}}
+        <option value="{{id}}">{{id}} {{gameName}}</option>
+        {{/each}}
+        </select><br>
+      <input type='submit' value="Add Game to Customer's Library">
+  </form>
+  <script defer>selectCustomer({{Customers.custId}});</script>
+  <script defer>selectGame({{Game.gameId}});</script>
+</html>
