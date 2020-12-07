@@ -2,8 +2,17 @@
 <h1>Update {{Games.gameName}}:</h1>
 <form id="update-game" action="/games" method="post">
     Name: <input type="text" name="gameName" value="{{Games.gameName}}"><br>
-    Genre Id: <input type="text" name="genreId" value="{{Games.genreId}}"><br>
-    Platform Id: <input type="text" name="platformId" value="{{Games.platformId}}"><br>
+    Genre: <select id='genre' name="genreId"> 
+                {{#each Genres}}
+                <option value="{{id}}">{{genreName}}</option>
+                {{/each}}
+                </select><br>
+                
+    Platform: <select id='platform' name="platformId"> 
+                {{#each Platforms}}
+                <option value="{{id}}">{{platformName}}</option>
+                {{/each}}
+                </select><br>
 </form>
 <button onclick="updateGame({{Games.gameId}})">Update</button>
 {{!-- <script defer>selectPlanet({{person.homeworld}});</script> --}}
