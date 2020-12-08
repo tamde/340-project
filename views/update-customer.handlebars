@@ -9,11 +9,11 @@
 </head>
 <h2>Update {{person.firstName}} {{person.lastName}}:</h2>
 <form id="update-customer" action="/customers" method="post">
-    First name: <input type="text" name="fname" value="{{person.firstName}}"><br>
+    First name: <input type="text" name="fname" value="{{person.firstName}}" required><br>
     Last name: <input type="text" name="lname" value="{{person.lastName}}"><br>
-    Street: <input type="text" name="street" value="{{person.street}}"><br>
-    City: <input type="text" name="city" value="{{person.city}}"><br>
-    State: <input type="text" name="state" value="{{person.state}}"><br>
+    Street: <input type="text" name="street" value="{{person.street}}" required><br>
+    City: <input type="text" name="city" value="{{person.city}}" required><br>
+    State: <input type="text" name="state" value="{{person.state}}" required><br>
 </form>
 <button onclick="updatePerson({{person.id}})">Update</button>
 </html>

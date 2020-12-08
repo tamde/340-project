@@ -18,12 +18,12 @@
     <div>
 <table>
     <thead>
-    <th>custID</th>
+    <th>ID</th>
     <th>First Name</th>
     <th>Last Name</th>
-    <th>street</th>
-    <th>city</th>
-    <th>state</th>
+    <th>Street</th>
+    <th>City</th>
+    <th>State</th>
   </thead>
     <tbody>
         {{#each Customers}}
@@ -42,26 +42,25 @@
 </table>
   <h3>Insert Customer</h3>
   <form id='addCustomer' action='/customers' method='post'>
-      First Name: <input type='text' name='fName'>
-      Last Name: <input type='text' name='lName'>
-      Street: <input type='text' name='street'>
-      City: <input type='text' name='city'>
-      State: <input type='text' name='state'>
+      First Name: <input type='text' name='fName' required>
+      Last Name: <input type='text' name='lName' required>
+      Street: <input type='text' name='street' required>
+      City: <input type='text' name='city' required>
+      State: <input type='text' name='state' maxlength='2' required>
       <input type='submit' value='Insert New Customer'>
   </form>
 
   <h3>Filter Customers</h3>
-  <form id='filterCustomers' action='' method=''>
-      <label>Firstname:
-          <input type='text' name='name'>
-      </label>
-      <label>genre:
-          <input type='text' name='genreName'>      
-      </label>
-      <label>platform:
-          <input type='text' name='platformName'>
-      </label>
-      <input type='button' value='Filter' onclick='filter()'>
+  <form id='search_first' action='' method=''>
+    <label> Search Customers For First Name Starting With:</label>
+    <input id='first_name_search_string' type='text' name='first_name_search_string' value='' maxlength='1' required>
+    <input type="button" value="Search" onclick="searchCustomersByFirstName()">
+  </form>
+
+  <form id='search_last' action='' method=''>
+    <label> Search Customers For Last Name Starting With:</label>
+    <input id='last_name_search_string' type='text' name='last_name_search_string' value='' maxlength='1' required>
+    <input type="button" value="Search" onclick="searchCustomersByLastName()">
   </form>
 
 </html>

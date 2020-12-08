@@ -1,15 +1,10 @@
 <html>
-<br>
-<br>
-<h2>
-    Games Table
-</h2>
 <table>
     <thead>
         <th>Game Id</th>
-        <th>Game Name</th>
-        <th>Genre Name</th>
-        <th>Platform Name</th>
+        <th>Name</th>
+        <th>Genre Id</th>
+        <th>Platform Id</th>
     </thead>
     <tbody>
         {{#each Games}}
@@ -29,7 +24,7 @@
 
 <h3>Insert Game</h3>
 <form id='addGame' action='/games' method='post'>
-    Game: <input type='text' name='gameName' required>
+    Game: <input type='text' name='gameName'>
     Genre: <select id='genre' name="genreId"> 
                 {{#each Genres}}
                 <option value="{{id}}">{{genreName}}</option>
@@ -45,18 +40,18 @@
     <input type='submit' value='Submit'>
 </form>
 
-{{!-- <h3>Filter Game</h3>
+<h1>Filter Game</h1>
 <form id='filterGame' action='' method=''>
     <label>name:</label>
-        <input id='gameNameSearch' type='text' name='gameNameSearch'  value=''> --}}
+        <input type='text' name='gameNameString' id = 'gameNameSearch' value = ''>
     
-    {{!-- <label>genre:</label>
+    <label>genre:</label>
         <input type='text' name='genreName' id = 'genreNameSearch' value = ''>      
     
     <label>platform:</label>
-        <input type='text' name='platformName'> --}}
+        <input type='text' name='platformName'>
     
-    {{!-- <input type="button" value="Submit" onclick="searchGameByName()">
-</form> --}}
+    <input type="button" value="Filter" onclick="searchGameByName()">
+</form>
 
 </html>
