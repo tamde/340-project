@@ -1,3 +1,4 @@
+//function called to help update a customer
 function updatePerson(id){
     $.ajax({
         url: '/customers/' + id,
