@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('./dbcon.js');
 
+// get all platforms to display for platforms table
 function getPlatforms(res, mysql, context, complete){
     mysql.pool.query("SELECT * FROM Platforms", function(error, results, fields){
       if(error){
@@ -14,7 +15,7 @@ function getPlatforms(res, mysql, context, complete){
     });
   }
 
-
+// post request to insert platforms into database
 router.post('/', function(req, res){
     console.log(req.body)
     var mysql = req.app.get('mysql');
@@ -31,11 +32,10 @@ router.post('/', function(req, res){
     });
   });
 
-
+// main route for platforms page.
 router.get("/", function(req, res){
 var callbackCount = 0;
 var context = {};
-
 var mysql = req.app.get('mysql');
 getPlatforms(res, mysql, context, complete);
 function complete(){

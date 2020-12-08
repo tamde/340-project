@@ -3,11 +3,11 @@ module.exports = function(){
 
 
 var express = require('express');
-// var app = express();
+var app = express();
 var router = express.Router();
 var mysql = require('./dbcon.js');
 
-// displaying all games
+// get all games to display all games for games table
 function getGames(res, mysql, context, complete){
   mysql.pool.query("SELECT gameId, gameName, genreName, platformName FROM ((Games INNER JOIN Genres ON Games.genreId = Genres.genreId)INNER JOIN Platforms ON Games.platformId = Platforms.platformId);", function(error, results, fields){
     if(error){
@@ -20,7 +20,7 @@ function getGames(res, mysql, context, complete){
   });
 }
 
-// getting drop d
+// get all genres to populate drop down
 function getGenres(res, mysql, context, complete){
   mysql.pool.query("SELECT genreId as id, genreName FROM Genres", function(error, results, fields){
       if(error){
@@ -31,7 +31,7 @@ function getGenres(res, mysql, context, complete){
       complete();
   });
 }
-
+// get all platforms to populate drop down
 function getPlatforms(res, mysql, context, complete){
   mysql.pool.query("SELECT platformId as id, platformName FROM Platforms", function(error, results, fields){
       if(error){
@@ -43,7 +43,7 @@ function getPlatforms(res, mysql, context, complete){
   });
 }
 
-// for updating
+// for updating games
 function getSingleGame(res, mysql, context, id, complete){
   var sql = "SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameId = ?";
   var inserts = [id];
@@ -59,20 +59,22 @@ function getSingleGame(res, mysql, context, id, complete){
 
 
 // filtering
-function getGamesByName(req, res, mysql, context, complete){
-  // let gameName = document.getElementById(gameName).value;
-  var query = 'SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameId = ?';
-  console.log(query);
-  mysql.pool.query(query, function(error, results, fields){
-    if(error){
-        res.write(JSON.stringify(error));
-        res.end();
-    }
-    context.Games = results;
-    complete();
-  });
-}
+// function getGamesByName(req, res, mysql, context, complete){
+//   // let gameName = document.getElementById(gameName).value;
+//   var query = "SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameName LIKE " + mysql.pool.escape(req.params.s + '%');
+//   // console.log(query);
+//   mysql.pool.query(query, function(error, results, fields){
+//     console.log(query);
+//     if(error){
+//         res.write(JSON.stringify(error));
+//         res.end();
+//     }
+//     context.Games = results;
+//     complete();
+//   });
+// }
 
+// main route for games page
 router.get("/", function(req, res){
   var callbackCount = 0;
   var context = {};
@@ -90,23 +92,23 @@ router.get("/", function(req, res){
 });
 
 
-// filtering
-router.get("/search/:s", function(req, res){
-  var callbackCount = 0;
-  var context = {};
-  context.jsscripts = ["searchGame.js"];
-  var mysql = req.app.get('mysql');
-  getGamesByName(res, mysql, context, complete);
-  function complete(){
-    callbackCount++;
-    if(callbackCount >= 1){
-      res.render("games", context);
-    }
-  }
-})
+// // filtering
+// router.get("/search/:s", function(req, res){
+//   var callbackCount = 0;
+//   var context = {};
+//   context.jsscripts = ["searchGame.js", "deleteGame.js"];
+//   var mysql = req.app.get('mysql');
+//   getGamesByName(req, res, mysql, context, complete);
+//   function complete(){
+//     callbackCount++;
+//     if(callbackCount >= 1){
+//       res.render("games", context);
+//     }
+//   }
+// })
 
 
-  /* Display one person for the specific purpose of updating people */
+  /* Display one game for updating only the specified game */
 
   router.get('/:id', function(req, res){
     callbackCount = 0;
@@ -127,7 +129,7 @@ router.get("/search/:s", function(req, res){
 
 
 
-// inserting game
+// post request for inserting game to the database
 router.post('/', function(req, res){
   console.log(req.body)
   var mysql = req.app.get('mysql');
@@ -144,7 +146,7 @@ router.post('/', function(req, res){
   });
 });
 
-// updating
+// put request for updating a specific game
 router.put('/:id', function(req, res){
   var mysql = req.app.get('mysql');
   console.log(req.body)
@@ -163,7 +165,7 @@ router.put('/:id', function(req, res){
   });
 });
 
-//
+// delete request to delete game from table and database
 router.delete('/:id', function(req, res){
   var mysql = req.app.get('mysql');
   var sql = "DELETE FROM Games WHERE gameId = ?";

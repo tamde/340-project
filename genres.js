@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('./dbcon.js');
-
+// get all genres for to display genre table
 function getGenres(res, mysql, context, complete){
     mysql.pool.query("SELECT * FROM Genres", function(error, results, fields){
       if(error){
@@ -14,7 +14,7 @@ function getGenres(res, mysql, context, complete){
     });
   }
 
-
+// post request to insert genres into database
 router.post('/', function(req, res){
     console.log(req.body)
     var mysql = req.app.get('mysql');
@@ -31,7 +31,7 @@ router.post('/', function(req, res){
     });
   });
 
-
+// main route for genre page
 router.get("/", function(req, res){
 var callbackCount = 0;
 var context = {};
