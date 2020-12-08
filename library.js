@@ -2,6 +2,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
+    //function to help display all columns in the library
     function getLibrary(res, mysql, context, complete){
       mysql.pool.query("SELECT concat(firstName,' ',lastName) AS fullname, gameName FROM ((Library INNER JOIN Customers ON Library.custId = Customers.custId) INNER JOIN Games ON Library.gameId = Games.gameId);", function(error, results, fields){
         if(error){
@@ -14,6 +15,7 @@ module.exports = function(){
       });
     }
 
+    //helper function used to format a dropdown customer input menu
     function getCustomers(res, mysql, context, complete){
         mysql.pool.query("SELECT custId as id, firstName, lastName FROM Customers", function(error, results, fields){
             if(error){
@@ -25,6 +27,7 @@ module.exports = function(){
         });
     }
 
+    //helper function used to format a dropdown game input menu
     function getGames(res, mysql, context, complete){
         mysql.pool.query("SELECT gameId as id, gameName FROM Games", function(error, results, fields){
             if(error){
@@ -36,6 +39,7 @@ module.exports = function(){
         });
     }
 
+    //route that handles the main page, displaying the library
     router.get("/", function(req, res){
       var callbackCount = 0;
       var context = {};
@@ -51,6 +55,7 @@ module.exports = function(){
       }
     });
 
+    //route that handles inserting data into the library table
     router.post('/', function(req, res){
       console.log(req.body)
       var mysql = req.app.get('mysql');
