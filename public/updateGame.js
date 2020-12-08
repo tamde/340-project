@@ -1,3 +1,4 @@
+// function called to help update game
 function updateGame(id){
     $.ajax({
         url: '/games/' + id,
