@@ -27,11 +27,80 @@ module.exports = function(){
           });
       }
 
+  function getPeoplebyHomeworld(req, res, mysql, context, complete){
+        var query = "SELECT bsg_people.character_id as id, fname, lname, bsg_planets.name AS homeworld, age FROM bsg_people INNER JOIN bsg_planets ON homeworld = bsg_planets.planet_id WHERE bsg_people.homeworld = ?";
+        console.log(req.params)
+        var inserts = [req.params.homeworld]
+        mysql.pool.query(query, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.people = results;
+            complete();
+        });
+    }
+
+    function getCustomerWithFirstNameLike(req, res, mysql, context, complete) {
+        var query = "SELECT custId, firstName, lastName, street, city, state FROM Customers WHERE firstName LIKE " + mysql.pool.escape(req.params.s + '%');
+        console.log(query)
+        mysql.pool.query(query, function(error, results, fields){
+            if(error){
+              res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.Customers = results;
+            complete();
+        });
+    }
+
+    router.get('/firstnamesearch/:s', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteperson.js","searchcustomers.js"];
+        var mysql = req.app.get('mysql');
+        getCustomerWithFirstNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('customers', context);
+            }
+        }
+    });
+
+    function getCustomerWithLastNameLike(req, res, mysql, context, complete) {
+        var query = "SELECT custId, firstName, lastName, street, city, state FROM Customers WHERE lastName LIKE " + mysql.pool.escape(req.params.s + '%');
+        console.log(query)
+        mysql.pool.query(query, function(error, results, fields){
+            if(error){
+              res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.Customers = results;
+            complete();
+        });
+    }
+
+    router.get('/lastnamesearch/:s', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["deleteperson.js","searchcustomers.js"];
+        var mysql = req.app.get('mysql');
+        getCustomerWithLastNameLike(req, res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('customers', context);
+            }
+        }
+    });
+
+
   //Display customers table//
   router.get("/", function(req, res){
     var callbackCount = 0;
     var context = {};
-    context.jsscripts = ["deleteperson.js"]
+    context.jsscripts = ["deleteperson.js","searchcustomers.js"];
     var mysql = req.app.get('mysql');
     getCustomers(res, mysql, context, complete);
     function complete(){
