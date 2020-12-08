@@ -3,7 +3,7 @@ module.exports = function(){
 
 
 var express = require('express');
-// var app = express();
+var app = express();
 var router = express.Router();
 var mysql = require('./dbcon.js');
 
@@ -61,9 +61,10 @@ function getSingleGame(res, mysql, context, id, complete){
 // filtering
 function getGamesByName(req, res, mysql, context, complete){
   // let gameName = document.getElementById(gameName).value;
-  var query = 'SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameId = ?';
-  console.log(query);
+  var query = "SELECT gameId, gameName, genreId, platformId FROM Games WHERE gameName LIKE " + mysql.pool.escape(req.params.s + '%');
+  // console.log(query);
   mysql.pool.query(query, function(error, results, fields){
+    console.log(query);
     if(error){
         res.write(JSON.stringify(error));
         res.end();
@@ -94,9 +95,9 @@ router.get("/", function(req, res){
 router.get("/search/:s", function(req, res){
   var callbackCount = 0;
   var context = {};
-  context.jsscripts = ["searchGame.js"];
+  context.jsscripts = ["searchGame.js", "deleteGame.js"];
   var mysql = req.app.get('mysql');
-  getGamesByName(res, mysql, context, complete);
+  getGamesByName(req, res, mysql, context, complete);
   function complete(){
     callbackCount++;
     if(callbackCount >= 1){
